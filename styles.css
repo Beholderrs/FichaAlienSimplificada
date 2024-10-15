@@ -111,6 +111,9 @@ input[type="text"] {
     background-image: url('./assets/bg3.png');
 }
 
+.bg-option:nth-child(3) {
+    background-image: url('./assets/bg4.png');
+}
 
 
 /*FICHA*/
