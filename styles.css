@@ -85,8 +85,7 @@ input[type="text"] {
 .bg-switcher {
     display: flex;
     float: right;
-    gap: 5
-    px;
+    gap: 5px;
     justify-content: right;
     margin-top: 10px;
 }
@@ -101,15 +100,15 @@ input[type="text"] {
 }
 
 .bg-option:nth-child(1) {
-    background-image: url('/assets/bg1.png');
+    background-image: url('./assets/bg1.png');
 }
 
 .bg-option:nth-child(2) {
-    background-image: url('/assets/bg2.png');
+    background-image: url('./assets/bg2.png');
 }
 
 .bg-option:nth-child(3) {
-    background-image: url('/assets/bg3.png');
+    background-image: url('./assets/bg3.png');
 }
 
 
