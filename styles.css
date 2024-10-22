@@ -140,7 +140,6 @@ input[type="text"] {
     align-content: start;
     margin-top: 50px;
     float: left;
-    width: 18%;
     gap: 15px;
 }
 
@@ -305,8 +304,8 @@ footer {
 
 
 
-/* Media Queries para telas menores que 600px */
-@media (max-width: 1450px) {
+/* Media Queries para telas entre 601px e 1445px */
+@media (max-width: 1400px) {
     .atributos-container {
         flex-direction: column;
     }
@@ -337,7 +336,7 @@ footer {
 
     .vida {
         width: 20vw;
-        margin-bottom: 10vh;
+        margin-bottom: 5vh;
         font-size: larger;
         align-items: center;
     }
@@ -363,7 +362,6 @@ footer {
 
     body {
         font-size: 12px;
-        font-family: Arial, Helvetica, sans-serif;
     }
 
     main{
@@ -396,7 +394,7 @@ footer {
         text-align-last: left;
         color: yellow;
         background: none;
-        margin-left: 20%;
+        margin-left: 7%;
     }
 
     input[type="number"] {
@@ -407,19 +405,26 @@ footer {
     }
 }
 
-@media (max-width: 1450px) {
+/*Media querie para telas até 600px*/
+@media (max-width: 600px) {
 
     body{
         font-size: xx-small;
+        background-size: 200%;
+        background-position-x: center;
+    }
+
+    h2.armor{
+        justify-content: none;
     }
 
     main{
-        width: 100vw;
-        padding: 5px;
+        width: 90vw;
     }
 
     .atributos-container {
         flex-direction: column;
+        font-family: Arial, Helvetica, sans-serif;
     }
 
     .centralizar{
@@ -433,6 +438,7 @@ footer {
     .atributo-coluna {
         display: flex;
         font-size: small;
+        font-family: Arial, Helvetica, sans-serif;
         width: fit-content;
         padding: 0;
         border-bottom: solid 1px;
@@ -442,16 +448,16 @@ footer {
     input[type="text"] {
         font-size: x-small;
         width: 80vw;
-        font-family: OCRAStd;
+        font-family: Arial, Helvetica, sans-serif;
         outline: none;
         text-align-last: left;
         color: yellow;
         background: none;
-        margin-left: 20%;
+        margin-left: 7%;
     }
 
     footer{
-        font-size: 10px;
+        font-size: 7px;
     }
 
 }
