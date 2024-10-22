@@ -68,6 +68,7 @@ input[type="number"] {
     font-weight: bolder;
     border-radius: 20% 0%;
     outline: solid 1px #00BCD4;
+    cursor: pointer;
 }
 
 input[type="text"] {
@@ -78,7 +79,8 @@ input[type="text"] {
     text-align-last: left;
     color: yellow;
     background: none;
-    margin-left: 20%;
+    margin-left: 5%;
+    cursor: pointer;
 }
 
 
@@ -166,6 +168,7 @@ label.personagem, input.personagem, label.vida {
     font-family: OCRAStd;
     font-weight: 400;
     font-style: normal;
+
 }
 
 .atributos-container {
@@ -296,6 +299,21 @@ label.rolar {
     font-size: 0px;
 }
 
+
+/*Fim da página*/
+
+textarea{
+    font-family: 'OCRAStd';
+    color: yellow;
+    background-color: transparent;
+    backdrop-filter: grayscale(1);
+    width: 50vw;
+    height: 20vh;
+    margin-top: 5vh;
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+
 footer {
     font-size: large;
     text-align: center;
@@ -304,8 +322,8 @@ footer {
 
 
 
-/* Media Queries para telas entre 601px e 1445px */
-@media (max-width: 1400px) {
+/* Media Queries para telas entre 601px e 1610px */
+@media (max-width: 1610px) {
     .atributos-container {
         flex-direction: column;
     }
@@ -358,6 +376,7 @@ footer {
         width: 100%;
         font-size: 15px;
         margin: 5px 10px;
+        cursor: pointer;
     }
 
     body {
