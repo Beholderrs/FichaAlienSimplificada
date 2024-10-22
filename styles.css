@@ -72,7 +72,7 @@ input[type="number"] {
 
 input[type="text"] {
     font-size: x-large;
-    width: 60%;
+    width: 60vw;
     font-family: OCRAStd;
     outline: none;
     text-align-last: left;
@@ -80,6 +80,7 @@ input[type="text"] {
     background: none;
     margin-left: 20%;
 }
+
 
 /*SWITCH DE IMAGENS*/
 .bg-switcher {
@@ -119,6 +120,7 @@ input[type="text"] {
 /*FICHA*/
 .apresentacao {
     display: flex;
+    width: 50vw;
     flex-direction: column;
     text-align: left;
     background-size: cover;
@@ -304,7 +306,7 @@ footer {
 
 
 /* Media Queries para telas menores que 600px */
-@media (max-width: 1000px) {
+@media (max-width: 1450px) {
     .atributos-container {
         flex-direction: column;
     }
@@ -318,25 +320,31 @@ footer {
     }
 
     .atributo-coluna {
-        width: 100%;
-        padding: 0;
         display: flex;
-        place-content: space-evenly;
+        width: fit-content;
+        padding: 0;
+        border-bottom: none;
+        white-space: break-spaces;
     }
 
     .checkbox-group div {
         width: 100%;
     }
 
+    div.vida{
+        display: ruby;
+    }
+
     .vida {
-        width: 100%;
+        width: 20vw;
+        margin-bottom: 10vh;
         font-size: larger;
         align-items: center;
-        margin-bottom: 25px;
     }
 
     .section {
         width: 100%;
+        display: contents;
         flex-direction: column;
         align-items: flex-start;
     }
@@ -359,6 +367,10 @@ footer {
     }
 
     main{
+        display: grid;
+        justify-content: normal;
+        place-self: center;
+        width: 90vw;
         background-image: none;
     }
 
@@ -369,12 +381,22 @@ footer {
     h2 {
         font-size: large;
         gap: 10px;
-        display: table-row;
         flex-flow: row;
         align-content: center;
         flex-wrap: wrap;
         font-style: oblique;
 
+    }
+
+    input[type="text"] {
+        font-size: x-large;
+        width: 80vw;
+        font-family: OCRAStd;
+        outline: none;
+        text-align-last: left;
+        color: yellow;
+        background: none;
+        margin-left: 20%;
     }
 
     input[type="number"] {
@@ -383,4 +405,53 @@ footer {
         font-size: large;
         border-radius: 10%;
     }
+}
+
+@media (max-width: 1450px) {
+
+    body{
+        font-size: xx-small;
+    }
+
+    main{
+        width: 100vw;
+        padding: 5px;
+    }
+
+    .atributos-container {
+        flex-direction: column;
+    }
+
+    .centralizar{
+        font-size: 10px;
+    }
+
+    .personagem{
+        font-size: 10px;
+    }
+
+    .atributo-coluna {
+        display: flex;
+        font-size: small;
+        width: fit-content;
+        padding: 0;
+        border-bottom: solid 1px;
+        white-space: break-spaces;
+    }
+
+    input[type="text"] {
+        font-size: x-small;
+        width: 80vw;
+        font-family: OCRAStd;
+        outline: none;
+        text-align-last: left;
+        color: yellow;
+        background: none;
+        margin-left: 20%;
+    }
+
+    footer{
+        font-size: 10px;
+    }
+
 }
