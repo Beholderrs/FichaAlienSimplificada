@@ -1,66 +1,57 @@
-// Função para rolar os dados base e dados de estresse
 function rolarDados(atributoId, habilidadeId) {
     let atributo = parseInt(document.getElementById(atributoId).value) || 0;
     let habilidade = parseInt(document.getElementById(habilidadeId).value) || 0;
     let estresse = parseInt(document.getElementById('estresse').value) || 0;
-    let totalDados = atributo + habilidade;
+    let bonus = parseInt(document.getElementById('bonus').value) || 0;
+    let totalDadosBase = atributo + habilidade + bonus;
     let resultadoBase = [];
     let resultadoEstresse = [];
+    let estresseIncrementado = estresse;
+
+    // Rolagem dos dados base
+    for (let i = 0; i < totalDadosBase; i++) {
+        resultadoBase.push(Math.floor(Math.random() * 6) + 1);
+    }
+
+    // Rolagem dos dados de estresse
+    for (let i = 0; i < estresse; i++) {
+        let roll = Math.floor(Math.random() * 6) + 1;
+        resultadoEstresse.push(roll);
+        if (roll === 1) {
+            estresseIncrementado++;
+        }
+    }
+
+    mostrarResultado(resultadoBase, resultadoEstresse, estresseIncrementado);
+}
+
+function rolarAtributo(atributoId) {
+    let atributo = parseInt(document.getElementById(atributoId).value) || 0;
+    let estresse = parseInt(document.getElementById('estresse').value) || 0;
+    let bonus = parseInt(document.getElementById('bonus').value) || 0;
+    let totalDados = atributo + bonus;
+    let resultadoBase = [];
+    let resultadoEstresse = [];
+    let estresseIncrementado = estresse;
 
     for (let i = 0; i < totalDados; i++) {
         resultadoBase.push(Math.floor(Math.random() * 6) + 1);
     }
 
     for (let i = 0; i < estresse; i++) {
-        resultadoEstresse.push(Math.floor(Math.random() * 6) + 1);
+        let roll = Math.floor(Math.random() * 6) + 1;
+        resultadoEstresse.push(roll);
+        if (roll === 1) {
+            estresseIncrementado++;
+        }
     }
 
-    mostrarResultado(resultadoBase, resultadoEstresse);
+    mostrarResultado(resultadoBase, resultadoEstresse, estresseIncrementado);
 }
 
-// Função para rolar os dados do atributo
-function rolarAtributo(atributoId) {
-    let atributo = parseInt(document.getElementById(atributoId).value) || 0;
-    let estresse = parseInt(document.getElementById('estresse').value) || 0;
-    let resultadoBase = [];
-    let resultadoEstresse = [];
-
-    for (let i = 0; i < atributo; i++) {
-        resultadoBase.push(Math.floor(Math.random() * 6) + 1);
-    }
-
-    for (let i = 0; i < estresse; i++) {
-        resultadoEstresse.push(Math.floor(Math.random() * 6) + 1);
-    }
-
-    mostrarResultado(resultadoBase, resultadoEstresse);
-}
-
-// Função para rolar os dados da armadura
-function rolarArmadura() {
-    let armadura = parseInt(document.getElementById('armadura').value) || 0;
-    let resultadoBase = [];
-
-    for (let i = 0; i < armadura; i++) {
-        resultadoBase.push(Math.floor(Math.random() * 6) + 1);
-    }
-
-    mostrarResultado(resultadoBase, []);
-}
-
-//Função para trocar de background ao clicar
-document.querySelectorAll('.bg-option').forEach(option => {
-    option.addEventListener('click', () => {
-        document.body.style.backgroundImage = `url(${option.getAttribute('data-bg')})`;
-    });
-});
-
-
-// Função para exibir os resultados em um modal
-function mostrarResultado(resultadoBase, resultadoEstresse) {
+function mostrarResultado(resultadoBase, resultadoEstresse, estresseIncrementado) {
     let baseContainer = document.getElementById('resultadoBase');
     let estresseContainer = document.getElementById('resultadoEstresse');
-
     baseContainer.innerHTML = '';
     estresseContainer.innerHTML = '';
 
@@ -90,14 +81,63 @@ function mostrarResultado(resultadoBase, resultadoEstresse) {
 
     let modal = document.getElementById("resultadoModal");
     modal.style.display = "block";
+    
+    // Armazenar o valor incrementado de estresse em um atributo de dados
+    modal.setAttribute('data-estresse-incrementado', estresseIncrementado);
 }
 
+// Função para rolar os dados da armadura
+function rolarArmadura() {
+    let armadura = parseInt(document.getElementById('armadura').value) || 0;
+    let resultadoBase = [];
+
+    for (let i = 0; i < armadura; i++) {
+        resultadoBase.push(Math.floor(Math.random() * 6) + 1);
+    }
+
+    mostrarResultado(resultadoBase, []);
+}
+
+//Função para trocar de background ao clicar
+document.querySelectorAll('.bg-option').forEach(option => {
+    option.addEventListener('click', () => {
+        document.body.style.backgroundImage = `url(${option.getAttribute('data-bg')})`;
+    });
+});
 
 // Função para fechar o modal
 function fecharModal() {
     let modal = document.getElementById("resultadoModal");
+    let estresseIncrementado = parseInt(modal.getAttribute('data-estresse-incrementado')) || 0;
+    document.getElementById('estresse').value = estresseIncrementado;
+
+    // Salvar os dados atualizados no local storage
+    salvarDados();
+    
     modal.style.display = "none";
 }
+
+// Adiciona eventos de clique para rolar dados ao clicar nos nomes
+document.addEventListener('DOMContentLoaded', (event) => {
+    carregarDados();
+
+    document.querySelectorAll('.rolar').forEach(label => {
+        label.addEventListener('click', () => {
+            const inputId = label.getAttribute('for');
+            if (label.classList.contains('atributo')) {
+                rolarAtributo(inputId);
+            } else {
+                const habilidadeId = document.getElementById(inputId).nextElementSibling.id;
+                rolarDados(inputId, habilidadeId);
+            }
+        });
+    });
+
+    // Salvar dados ao mudar valores dos inputs e textarea
+    document.querySelectorAll('input, textarea').forEach(input => {
+        input.addEventListener('change', salvarDados);
+    });
+});
 
 window.onclick = function(event) {
     let modal = document.getElementById("resultadoModal");
@@ -115,6 +155,7 @@ function salvarDados() {
         rival: document.getElementById('rival').value,
         estresse: document.getElementById('estresse').value,
         vitalidade: document.getElementById('vitalidade').value,
+        bonus: document.getElementById('bonus').value,
         forca: document.getElementById('forca').value,
         combate: document.getElementById('combate').value,
         operar_maquinas: document.getElementById('operar_maquinas').value,
@@ -131,7 +172,8 @@ function salvarDados() {
         comando: document.getElementById('comando').value,
         ajuda_medica: document.getElementById('ajuda_medica').value,
         manipulacao: document.getElementById('manipulacao').value,
-        armadura: document.getElementById('armadura').value
+        armadura: document.getElementById('armadura').value,
+        notas: document.getElementById('notas').value
     };
     localStorage.setItem('fichaRPG', JSON.stringify(dados));
 }
@@ -144,6 +186,7 @@ function carregarDados() {
         document.getElementById('carreira').value = dados.carreira;
         document.getElementById('camarada').value = dados.camarada;
         document.getElementById('rival').value = dados.rival;
+        document.getElementById('bonus').value = dados.bonus;
         document.getElementById('estresse').value = dados.estresse;
         document.getElementById('vitalidade').value = dados.vitalidade;
         document.getElementById('forca').value = dados.forca;
@@ -163,6 +206,7 @@ function carregarDados() {
         document.getElementById('ajuda_medica').value = dados.ajuda_medica;
         document.getElementById('manipulacao').value = dados.manipulacao;
         document.getElementById('armadura').value = dados.armadura;
+        document.getElementById('notas').value = dados.notas;
     }
 }
 
@@ -190,13 +234,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('ajuda_medica').previousElementSibling.addEventListener('click', () => rolarDados('empatia', 'ajuda_medica'));
     document.getElementById('manipulacao').previousElementSibling.addEventListener('click', () => rolarDados('empatia', 'manipulacao'));
 
-    document.getElementById('armadura').previousElementSibling.addEventListener('click', () => rolarArmadura());
+    document.getElementById('armadura').previousElementSibling.addEventListener('click', rolarArmadura);
 
-    // Salvar dados ao mudar valores dos inputs
-    document.querySelectorAll('input').forEach(input => {
-        input.addEventListener('change', salvarDados);
+    document.addEventListener('DOMContentLoaded', (event) => {
+        carregarDados();
+    
+        document.querySelectorAll('.rolar').forEach(label => {
+            label.addEventListener('click', () => {
+                const inputId = label.getAttribute('for');
+                if (label.classList.contains('atributo')) {
+                    rolarAtributo(inputId);
+                } else {
+                    const habilidadeId = document.getElementById(inputId).nextElementSibling.id;
+                    rolarDados(inputId, habilidadeId);
+                }
+            });
+        });
+    
+        // Salvar dados ao mudar valores dos inputs e textarea
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('change', salvarDados);
+        });
     });
 });
-
-
-//Alterar Background
