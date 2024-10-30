@@ -146,6 +146,10 @@ window.onclick = function(event) {
     }
 }
 
+//Função do botão pânico
+
+
+
 // Função para salvar os dados no local storage
 function salvarDados() {
     let dados = {

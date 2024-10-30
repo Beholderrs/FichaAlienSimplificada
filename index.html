@@ -13,15 +13,16 @@
 </head>
 <body>
     <main>
-        <h1>ALIEN </h1>
+        <h1>ALIEN RPG</h1>
         <div class="bg-switcher">
+            <h2>FICHA SIMPLIFICADA</h2>
             <div class="bg-option" data-bg="./assets/bg1.png">1</div>
             <div class="bg-option" data-bg="./assets/bg2.png">2</div>
             <div class="bg-option" data-bg="./assets/bg3.png">3</div>
             <div class="bg-option" data-bg="./assets/bg4.png">4</div>
         </div>
         
-        <h2 class="centralizar">FICHA SIMPLIFICADA</h2>
+        <h2 class="centralizar"></h2>
         <div class="personagem">
             <div class="apresentacao">
                 <label for="nome">Nome</label>
@@ -135,14 +136,15 @@
     <div id="resultadoModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="fecharModal()">&times;</span>
-            <h2 class="modal-title">Rolagem de Dados</h2>
+            <h2 class="modal-title">Resultado dos Dados</h2>
             <div class="resultado-container">
                 <div class="resultado-grid" id="resultadoBase"> Dados Base</div>
                 <div class="resultado-grid" id="resultadoEstresse"> Dados de Estresse</div>
             </div>
+            <!--<button id="rolar-panico" onclick="rolarPanico()" disabled>Rolar Pânico</button>
+            <div id="resultado-panico" class="resultado-panico"></div>-->
         </div>
     </div>
-    
 
     <div class="notas">
         <textarea placeholder="Notas" id="notas"></textarea>
